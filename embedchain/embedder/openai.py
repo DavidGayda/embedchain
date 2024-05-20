@@ -20,7 +20,7 @@ class OpenAIEmbedder(BaseEmbedder):
         api_base = self.config.api_base or os.environ.get("OPENAI_API_BASE")
 
         if self.config.deployment_name:
-            embeddings = AzureOpenAIEmbeddings(deployment=self.config.deployment_name)
+            embeddings = AzureOpenAIEmbeddings(deployment=self.config.deployment_name, api_key=api_key, base_url=api_base)
             embedding_fn = BaseEmbedder._langchain_default_concept(embeddings)
         else:
             if api_key is None and os.getenv("OPENAI_ORGANIZATION") is None:
